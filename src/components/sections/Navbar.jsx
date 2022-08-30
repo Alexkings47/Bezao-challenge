@@ -30,7 +30,7 @@ const StyledNav = styled.nav`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-   color: white;
+  color: white;
 
   .logo {
     width: 73.46px;
@@ -41,7 +41,7 @@ const StyledNav = styled.nav`
     list-style: none;
     font-size: 16px;
     line-height: 19.2px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     li:not(:last-child) {

@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Data } from "../Data";
 
-const MealScroll = () => {
+const MealScroll = ({ data }) => {
   function handleScroll() {
     console.log("Scrolled");
   }
   return (
     <StyledDiv onClick={handleScroll}>
-      {Data.map((item, index) => {
+      {data.map((item, index) => {
         return index === 1 ? (
           <img
             className="active-image"

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import MealScroll from "../elements/MealScroll";
+import { Data } from "../Data";
+import { BsArrowRight } from "react-icons/bs";
 
 const Meals = () => {
-  const [activeMeal, setactiveMeal] = useState([]);
+  const [activeMeal, setactiveMeal] = useState(Data);
 
   return (
     <StyledSection>
@@ -18,25 +20,39 @@ const Meals = () => {
         <div className="meal-image">
           <img
             src={require("../../images/background.png")}
-            alt="back drop image"
+            alt="back drop"
             className="backdrop-img"
+          />
+          <img
+            src={require(`../../images/${activeMeal[1].imgUrl}`)}
+            className="meal-display"
+            alt="meal"
           />
         </div>
         <div className="meal-scroll">
           {/* meal-scroll-label */}
           <div className="meal-scroll-label">
-            <div>Scroll to see more</div>
+            <p>Scroll to see more</p>
             <button className="nav-signup-btn" onClick={""}>
-              &darr;
+              <img src={require("../../images/arrow.png")} alt="arrow" />
             </button>
           </div>
-         <MealScroll />
+          <MealScroll data={activeMeal} />
         </div>
       </div>
       <div className="meal-bottom">
-        <div className="meal-price"></div>
-        <div className="meal-details"></div>
-        <div className="meal-time"></div>
+        <div className="meal-price">
+          <span className="meal-description">PRICE </span> <br />{" "}
+          <span>{activeMeal[1].price}</span>
+        </div>
+        <div className="meal-details">
+          <span className="meal-title">{activeMeal[1].title} </span> <br />
+          <span>{activeMeal[1].ingredients}</span>
+        </div>
+        <div className="meal-time">
+          <span className="meal-description">Preparation </span> <br />
+          <span>{activeMeal[1].time}</span>
+        </div>
       </div>
     </StyledSection>
   );
@@ -47,22 +63,22 @@ const StyledSection = styled.section`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   color: #ffffff;
 
   .meal-top,
   .meal-bottom {
     display: flex;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
   }
   .meal-text {
+    width: 30%;
     &-title {
       font-family: "Inter";
       font-weight: 900;
       font-size: 64px;
-      width: 200px;
       line-height: 77px;
       letter-spacing: 0.015em;
     }
@@ -76,41 +92,96 @@ const StyledSection = styled.section`
   }
 
   .meal-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+
     .backdrop-img {
       width: 450px;
       height: 450px;
-      mix-blend-mode: soft-light;
       opacity: 0.5;
+    }
+
+    .meal-display {
+      width: 375px;
+      height: 375px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
   .meal-scroll {
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    width: 30%;
 
-   
     &-label {
-      height: 500px;
-      transform: rotate(-90deg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      margin-right: -7rem;
+      transform: rotate(90deg);
 
-      div {
+      p {
         font-weight: 800;
         font-size: 12.6px;
         line-height: 26px;
-        height: 500px;
         letter-spacing: 6px;
         text-transform: uppercase;
         color: #fcfcfc;
+        white-space: nowrap;
+        margin-right: 5rem;
       }
+
       button {
-        width: 21px;
-        border-radius: 4px;
+        border-radius: 10px;
         background: none;
-        height: 46px;
+        padding: 2px 4px;
         color: #ffffff;
         border: 1px solid rgba(255, 255, 255, 0.5);
+        font-size: 24px;
+        margin-left: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(-90deg);
       }
     }
+  }
+  .meal-time,
+  .meal-price {
+    width: 30%;
+  }
+
+  .meal-details {
+    width: 40%;
+    text-align: center;
+  }
+  .meal-bottom {
+    margin-top: 2rem;
+  }
+  .meal-time {
+    text-align: right;
+  }
+  .meal-description {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .meal-title {
+    font-family: "Inter";
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
+    letter-spacing: 0.015em;
   }
 `;
