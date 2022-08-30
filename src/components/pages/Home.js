@@ -19,6 +19,10 @@ const StyledMain = styled.main`
   height: 100vh;
   padding: 20.4px 100px 49.5px;
   position: relative;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: space-between;
 
   .background {
     filter: blur(19px);
