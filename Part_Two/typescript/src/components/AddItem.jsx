@@ -1,24 +1,33 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import { FiMail } from "react-icons/fi";
 import styled from "styled-components";
 import img1 from "../images/headerimg.png";
+import { menuActions } from "./features/MenuReducer";
+import { useDispatch } from "react-redux";
+import Navbar from "./sections/NavBar";
 
-const Menu = () => {
+const AddItem = () => {
   const [profile, setProfile] = useState({
     title: "",
-    duration: "",
+    time: "",
     price: "",
     ingredients: "",
   });
+  const dispatch = useDispatch();
+  const { addItem } = menuActions;
 
-  const formRef = useRef(null);
-  function addMenu() {}
+  const newItem = profile;
+  function addMenu(evt) {
+    evt.preventDefault();
+    dispatch(addItem(newItem));
+  }
 
   return (
     <StyledSection>
+      <Navbar color={"white"} />
       <h2 className="section-heading">Add Details Of New Food Menu Item</h2>
-      <form ref={formRef} onSubmit={addMenu} className="field">
+      <form  onSubmit={addMenu} className="field">
         <div className="input-field">
           <span className="icon-left">
             <FiMail />
@@ -59,10 +68,10 @@ const Menu = () => {
             <FiMail />
           </span>
           <input
-            value={profile.duration}
+            value={profile.time}
             type="text"
             onChange={(evt) => {
-              setProfile({ ...profile, duration: evt.target.value });
+              setProfile({ ...profile, time: evt.target.value });
             }}
             placeholder="duration in mins"
           />
@@ -91,14 +100,13 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default AddItem;
 const StyledSection = styled.section`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   width: 100%;
-  padding: 3rem;
   height: 100vh;
   background: linear-gradient(#0a2640c2, #0a2640c2),
     url(${img1}) no-repeat center/ cover;

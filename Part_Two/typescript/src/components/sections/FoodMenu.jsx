@@ -1,27 +1,29 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
-import { Data } from "../Data";
 import FoodCard from "../elements/FoodCard";
 import img1 from "../../images/logo.png";
 import img2 from "../../images/headerimg.png";
 import Button from "../elements/Button";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const FoodMenu = () => {
-  const [data, setdata] = useState(Data)
+  const {menu} = useSelector((state)=> state.menu)
+
+
   return (
     <StyledDiv>
       <div className="service-text">
         <h2 className="section-heading">Food Menu</h2>
       </div>
       <div className="cards">
-        {data.map((item, index) => {
+        {menu.map((item, index) => {
           return (
             <FoodCard
               title={item.title}
-              imgUrl={item.imgUrl || "newfood.png" }
-              ingredients={item.ingredients || data[1].ingredients}
-              duration={item.time || data[1].ingredients}
+              imgUrl={item.imgUrl || "menu.png" }
+              ingredients={item.ingredients || menu[1].ingredients}
+              duration={item.time || menu[1].time}
               price={item.price }
               key={index}
             />
@@ -66,7 +68,7 @@ const StyledDiv = styled.section`
     display: grid;
     width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    row-gap: 2rem;
+    row-gap: 4rem;
     column-gap: 2rem;
     justify-items: center;
   }

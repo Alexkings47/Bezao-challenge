@@ -38,14 +38,13 @@ const StyledHeader = styled.header`
     align-items: flex-start;
     flex-direction: column;
     justify-content: space-between;
-    text-align: center;
+    text-align: left;
     padding: 2rem 0;
 
     &--title {
       font-size: 45px;
       margin-bottom: 1rem;
       font-family: "Inter";
-      text-align: left;
     }
     &--desc {
       font-size: 18px;

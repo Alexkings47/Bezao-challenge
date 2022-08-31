@@ -2,19 +2,22 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Button from "../elements/Button";
+import {Link} from  "react-router-dom"
 
-const Navbar = () => {
+const Navbar = ({color}) => {
   const [menu, setMenu] = useState(false);
 
   return (
-    <StyledNav menu={menu}>
+    <StyledNav menu={menu} style={{ color: color }}>
       <div className="nav-top">
         <div className="logo_div">
-          <img
-            className="logo"
-            src={require("../../images/logo.png")}
-            alt="logo"
-          />
+          <Link to="/">
+            <img
+              className="logo"
+              src={require("../../images/logo.png")}
+              alt="logo"
+            />
+          </Link>
           <p className="title">Meals</p>
         </div>
         <Button label={"sign up"} chosenClass={"nav-btn"} />
