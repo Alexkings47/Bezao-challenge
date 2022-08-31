@@ -4,10 +4,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
 import { Autoplay } from "swiper";
 import {Data} from '../Data'
-import { useSwiperSlide, useSwiper } from "swiper/react";
+import {  useSwiper } from "swiper/react";
 
-const MealScroll = ({ data,activeMeal, setActiveMeal }) => {
-  const   swiperSlide = useSwiperSlide();
+const MealScroll = ({ data, setActiveMeal }) => {
+  // const   swiperSlide = useSwiperSlide();
   const swiper = useSwiper();
   return (
     <StyledDiv>
