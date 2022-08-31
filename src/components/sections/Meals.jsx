@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MealScroll from "../elements/MealScroll";
 import { Data } from "../Data";
-import { BsArrowRight } from "react-icons/bs";
 
 const Meals = () => {
-  const [activeMeal, setactiveMeal] = useState(Data);
-
+  const [meal] = useState(Data);
+  const [activeMeal, setActiveMeal] = useState(Data[1]);
+  
   return (
     <StyledSection>
       {/* top part with main image */}
@@ -24,34 +24,26 @@ const Meals = () => {
             className="backdrop-img"
           />
           <img
-            src={require(`../../images/${activeMeal[1].imgUrl}`)}
+            src={require(`../../images/${meal[1].imgUrl}`)}
             className="meal-display"
             alt="meal"
           />
         </div>
-        <div className="meal-scroll">
-          {/* meal-scroll-label */}
-          <div className="meal-scroll-label">
-            <p>Scroll to see more</p>
-            <button className="nav-signup-btn" onClick={""}>
-              <img src={require("../../images/arrow.png")} alt="arrow" />
-            </button>
-          </div>
-          <MealScroll data={activeMeal} />
-        </div>
+
+        <MealScroll data={meal} setActiveMeal={setActiveMeal} />
       </div>
       <div className="meal-bottom">
         <div className="meal-price">
           <span className="meal-description">PRICE </span> <br />{" "}
-          <span>{activeMeal[1].price}</span>
+          <span>{activeMeal?.price}</span>
         </div>
         <div className="meal-details">
-          <span className="meal-title">{activeMeal[1].title} </span> <br />
-          <span>{activeMeal[1].ingredients}</span>
+          <span className="meal-title">{meal[1].title} </span> <br />
+          <span>{meal[1].ingredients}</span>
         </div>
         <div className="meal-time">
           <span className="meal-description">Preparation </span> <br />
-          <span>{activeMeal[1].time}</span>
+          <span>{meal[1].time}</span>
         </div>
       </div>
     </StyledSection>
@@ -65,6 +57,7 @@ const StyledSection = styled.section`
   flex-direction: column;
   /* align-items: center; */
   color: #ffffff;
+  
 
   .meal-top,
   .meal-bottom {
@@ -115,47 +108,6 @@ const StyledSection = styled.section`
     }
   }
 
-  .meal-scroll {
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 30%;
-
-    &-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 100%;
-      margin-right: -7rem;
-      transform: rotate(90deg);
-
-      p {
-        font-weight: 800;
-        font-size: 12.6px;
-        line-height: 26px;
-        letter-spacing: 6px;
-        text-transform: uppercase;
-        color: #fcfcfc;
-        white-space: nowrap;
-        margin-right: 5rem;
-      }
-
-      button {
-        border-radius: 10px;
-        background: none;
-        padding: 2px 4px;
-        color: #ffffff;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        font-size: 24px;
-        margin-left: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transform: rotate(-90deg);
-      }
-    }
-  }
   .meal-time,
   .meal-price {
     width: 30%;
