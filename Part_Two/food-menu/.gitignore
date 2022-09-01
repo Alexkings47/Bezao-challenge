@@ -8,10 +8,10 @@
 # testing
 /coverage
 
+/Part_Two
+
 # production
 /build
-
-/Part_Two/*
 
 # misc
 .DS_Store

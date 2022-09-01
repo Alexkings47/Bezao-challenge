@@ -1,10 +1,21 @@
-import React from "react";
+import React,{useEffect} from "react";
 import styled from "styled-components";
 import MealScroll from "../elements/MealScroll";
+import { CSSTransition } from "react-transition-group";
 
-
-const Meals = ({activeMeal, setActiveMeal}) => {
-  
+const Meals = ({ activeMeal, setActiveMeal }) => {
+  useEffect(() => {
+    const collection = document.getElementsByClassName("transit");
+    for (let i = 0; i < collection.length; i++) {
+      collection[i].style.animation =
+        "move 4s ease-out 2s infinite backwards";
+    }
+    return () => {
+      for (let i = 0; i < collection.length; i++) {
+        collection[i].style.animation = "";
+      }
+    };
+  }, [activeMeal]);
 
   return (
     <StyledSection className="container">
@@ -22,33 +33,40 @@ const Meals = ({activeMeal, setActiveMeal}) => {
             alt="back drop"
             className="backdrop-img"
           />
-          <img
-            src={require(`../../images/${activeMeal?.imgUrl}`)}
-            className="meal-display transit"
-            alt="meal"
-          />
+          <CSSTransition in={true} timeout={2000} classNames="transit">
+            <img
+              src={require(`../../images/${activeMeal?.imgUrl}`)}
+              className="meal-display"
+              alt="meal"
+            />
+          </CSSTransition>
         </div>
 
-        <MealScroll  setActiveMeal={setActiveMeal} />
+        <MealScroll setActiveMeal={setActiveMeal} />
       </div>
       <div className="meal-bottom">
         <div className="meal-price">
           <span className="meal-description">PRICE </span> <br />{" "}
-          <span className="meal-title transit">N{activeMeal?.price}</span>
+          <span className="meal-title transit-text">N{activeMeal?.price}</span>
         </div>
         <div className="meal-details">
-          <span className="meal-title transit" style={{ fontFamily: "Inter" }}>
+          <span
+            className="meal-title transit-text"
+            style={{ fontFamily: "Inter" }}
+          >
             {activeMeal?.title}{" "}
           </span>{" "}
           <br />
-          <span className="meal-ingredients transit">{activeMeal?.ingredients}</span>
+          <span className="meal-ingredients transit-text">
+            {activeMeal?.ingredients}
+          </span>
         </div>
         <div className="meal-time">
           <span className="meal-description" style={{ letterSpacing: "2px" }}>
             Preparation
           </span>{" "}
           <br />
-          <span className="meal-title transit">{activeMeal?.time}</span>
+          <span className="meal-title transit-text">{activeMeal?.time}</span>
         </div>
       </div>
     </StyledSection>
@@ -62,10 +80,42 @@ const StyledSection = styled.section`
   flex-direction: column;
   color: #ffffff;
 
-  .transit{
-    transition: all 0.5s;
+  
+
+  .transit {
+    animation: move 1.5s ease-out 1s infinite alternate backwards;
   }
 
+  @keyframes move {
+    0% {
+      opacity: 0.7;
+      filter: blur(5px);
+    }
+    80% {
+      opacity: 0.9;
+      filter: blur(1px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  .transit-text {
+    animation: switch 2.4s ease-out 1s infinite alternate forwards;
+  }
+
+  @keyframes switch {
+    0% {
+      opacity: 0.7;
+    }
+    80% {
+      opacity: 0.9;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
   .meal-top,
   .meal-bottom {
     display: flex;

@@ -26,7 +26,6 @@ const MealScroll = ({ setActiveMeal }) => {
           direction={"vertical"}
           centeredSlides={true}
           onSlideChange={(swiper) => setActiveMeal(Data[swiper.realIndex])}
-          onSwiper={(swiper) => console.log(swiper.realIndex)}
           longSwipes={false}
           loop={true}
         >
