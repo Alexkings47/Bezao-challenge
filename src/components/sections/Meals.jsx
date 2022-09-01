@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import MealScroll from "../elements/MealScroll";
-import { Data } from "../Data";
 
-const Meals = () => {
-  const [meal] = useState(Data);
-  const [activeMeal, setActiveMeal] = useState(Data[1]);
+
+const Meals = ({activeMeal, setActiveMeal}) => {
   
+
   return (
-    <StyledSection>
+    <StyledSection className="container">
       {/* top part with main image */}
       <div className="meal-top">
         <div className="meal-text">
@@ -24,26 +23,32 @@ const Meals = () => {
             className="backdrop-img"
           />
           <img
-            src={require(`../../images/${meal[1].imgUrl}`)}
-            className="meal-display"
+            src={require(`../../images/${activeMeal?.imgUrl}`)}
+            className="meal-display transit"
             alt="meal"
           />
         </div>
 
-        <MealScroll data={meal} setActiveMeal={setActiveMeal} />
+        <MealScroll  setActiveMeal={setActiveMeal} />
       </div>
       <div className="meal-bottom">
         <div className="meal-price">
           <span className="meal-description">PRICE </span> <br />{" "}
-          <span>{activeMeal?.price}</span>
+          <span className="meal-title transit">N{activeMeal?.price}</span>
         </div>
         <div className="meal-details">
-          <span className="meal-title">{meal[1].title} </span> <br />
-          <span>{meal[1].ingredients}</span>
+          <span className="meal-title transit" style={{ fontFamily: "Inter" }}>
+            {activeMeal?.title}{" "}
+          </span>{" "}
+          <br />
+          <span className="meal-ingredients transit">{activeMeal?.ingredients}</span>
         </div>
         <div className="meal-time">
-          <span className="meal-description">Preparation </span> <br />
-          <span>{meal[1].time}</span>
+          <span className="meal-description" style={{ letterSpacing: "2px" }}>
+            Preparation
+          </span>{" "}
+          <br />
+          <span className="meal-title transit">{activeMeal?.time}</span>
         </div>
       </div>
     </StyledSection>
@@ -55,9 +60,11 @@ const StyledSection = styled.section`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  /* align-items: center; */
   color: #ffffff;
-  
+
+  .transit{
+    transition: all 0.5s;
+  }
 
   .meal-top,
   .meal-bottom {
@@ -92,14 +99,15 @@ const StyledSection = styled.section`
     width: 40%;
 
     .backdrop-img {
-      width: 450px;
-      height: 450px;
+      width: 550px;
+      height: 550px;
+      mix-blend-mode: soft-light;
       opacity: 0.5;
     }
 
     .meal-display {
-      width: 375px;
-      height: 375px;
+      width: 450px;
+      height: 450px;
       border-radius: 50%;
       position: absolute;
       top: 50%;
@@ -130,10 +138,16 @@ const StyledSection = styled.section`
     text-transform: uppercase;
   }
   .meal-title {
-    font-family: "Inter";
     font-weight: 800;
     font-size: 24px;
     line-height: 29px;
+    letter-spacing: 0.015em;
+    font-family: "Lato";
+  }
+  .meal-ingredients {
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
     letter-spacing: 0.015em;
   }
 `;

@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+button{
+  border: none;
+  background: none;
+}
+
+:root {
+  --lightgreen: #16e5e2;
+  --bgcolor: #0a2640;
+}
+
+
+.container {
+  max-width: 1440px;
+}
+
+ul {
+  list-style-type: none;
+}

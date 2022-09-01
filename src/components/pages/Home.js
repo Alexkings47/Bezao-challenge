@@ -1,21 +1,26 @@
-import React from 'react'
-import styled from 'styled-components'
-import Navbar from '../sections/Navbar'
-import Meals from '../sections/Meals'
+import React, { useState } from "react";
+import styled from "styled-components";
+import Navbar from "../sections/Navbar";
+import Meals from "../sections/Meals";
+import { Data } from "../Data";
+// import background from `../../images/${activeMeal.imgUrl}`
 
 const Home = () => {
+  const [activeMeal, setActiveMeal] = useState(Data[0]);
   return (
-    <StyledMain>
-      <div className='background'></div>
-      <Navbar />  
-      <Meals />
+    <StyledMain
+      style={{
+        background: ` radial-gradient(50% 50% at 50% 50%, #fbbd05df 0%, #ff8f3fdf 100%), url(/images/${activeMeal.imgUrl}) no-repeat center/cover`,
+      }}
+    >
+      <Navbar />
+      <Meals activeMeal={activeMeal} setActiveMeal={setActiveMeal} />
     </StyledMain>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
 const StyledMain = styled.main`
-  background: radial-gradient(#fbbc05, #ff8f3f);
   height: 100vh;
   padding: 20.4px 100px 49.5px;
   position: relative;

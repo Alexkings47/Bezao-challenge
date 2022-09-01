@@ -3,38 +3,34 @@ import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
 import { Autoplay } from "swiper";
-import {Data} from '../Data'
-import {  useSwiper } from "swiper/react";
+import { Data } from "../Data";
 
-const MealScroll = ({ data, setActiveMeal }) => {
-  // const   swiperSlide = useSwiperSlide();
-  const swiper = useSwiper();
+const MealScroll = ({ setActiveMeal }) => {
+  const swiper = document.querySelector(".swiper")?.swiper;
   return (
     <StyledDiv>
-      {/* label */}
       <div className="meal-scroll-label">
         <p>Scroll to see more</p>
-        <button className="nav-signup-btn" onClick={() => swiper.slideNext()}>
+        <button className="nav-signup-btn" onClick={() => swiper?.slideNext()}>
           <img src={require("../../images/arrow.png")} alt="arrow" />
         </button>
       </div>
       {/* scroll bar */}
-      <div className="swiper-div">
         <Swiper
           modules={[Autoplay]}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
-          spaceBetween={50}
+          spaceBetween={30}
           slidesPerView={3}
-          direction={"vertical"}
           initialSlide={0}
+          speed={500}
+          direction={"vertical"}
           centeredSlides={true}
-          onSlideChange={() => setActiveMeal(Data[swiper?.activeIndex])}
-          onSwiper={ console.log()}
+          onSlideChange={(swiper) => setActiveMeal(Data[swiper.realIndex])}
+          onSwiper={(swiper) => console.log(swiper.realIndex)}
           longSwipes={false}
           loop={true}
         >
-          {console.log(swiper?.activeIndex)}
-          {data.map((item, index) => {
+          {Data.map((item, index) => {
             return (
               <SwiperSlide key={index}>
                 <img
@@ -47,7 +43,6 @@ const MealScroll = ({ data, setActiveMeal }) => {
             );
           })}
         </Swiper>
-      </div>
     </StyledDiv>
   );
 };
@@ -58,7 +53,7 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  /* width: 30%; */
+  width: 30%;
 
   .meal-scroll {
     &-label {
@@ -83,12 +78,12 @@ const StyledDiv = styled.div`
       button {
         border-radius: 10px;
         background: none;
-        padding: 2px 4px;
-        color: #ffffff;
+
         border: 1px solid rgba(255, 255, 255, 0.5);
-        font-size: 24px;
-        margin-left: 1rem;
+        /* margin-left: 1rem; */
         display: flex;
+        width: 21px;
+        height: 46px;
         justify-content: center;
         align-items: center;
         transform: rotate(-90deg);
@@ -96,35 +91,29 @@ const StyledDiv = styled.div`
     }
   }
 
-  .swiper-div {
+  
+  .swiper {
     width: 164px;
     height: 508px;
     background: #ffffff;
     box-shadow: 18px 39px 69px 4px rgba(0, 0, 0, 0.25);
     border-radius: 97px;
-    padding: 40px 8px;
-  }
-  .swiper {
-    width: 100%;
-    height: 100%;
+    padding: 10px 8px;
   }
   .swiper-slide {
     width: 95px;
     height: 95px;
     margin: 0 auto;
-    /* border: 1px solid red; */
+    padding: 40px 0;
 
     &-active {
       width: 148px;
       height: 148px;
-
-      /* border: 1px solid red; */
+      margin-top: -2rem;
     }
   }
   .inactive-image {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
     border-radius: 50%;
   }
 `;
