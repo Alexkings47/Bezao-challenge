@@ -27,7 +27,7 @@ const AddItem = () => {
     <StyledSection>
       <Navbar color={"white"} />
       <h2 className="section-heading">Add Details Of New Food Menu Item</h2>
-      <form  onSubmit={addMenu} className="field">
+      <form onSubmit={addMenu} className="field">
         <div className="input-field">
           <span className="icon-left">
             <FiMail />

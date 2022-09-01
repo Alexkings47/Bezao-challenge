@@ -26,7 +26,6 @@ const Header = () => {
 
 export default Header;
 const StyledHeader = styled.header`
-  /* min-height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -65,13 +64,18 @@ const StyledHeader = styled.header`
     }
   }
 
-  @media (min-width: 1000px) {
-    .header_image {
-      width: 40%;
+  @media (max-width: 600px) {
+    flex-direction: column;
 
-      /* &1 {
-        height: 20rem;
-      } */
+    .header_text{
+      align-items: center;
+      text-align: center;
+      width: 80%;
+    }
+    .header_image {
+      width: 60%;
+
+      
     }
   }
 `;

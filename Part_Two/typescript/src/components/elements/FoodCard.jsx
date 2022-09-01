@@ -94,14 +94,14 @@ const StyledDiv = styled.div`
   }
   .price {
     font-weight: 500;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 132%;
     color: #333131;
     width: 100%;
   }
   .card-title {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 24px;
     line-height: 160%;
     color: #4d4d4d;
   }
